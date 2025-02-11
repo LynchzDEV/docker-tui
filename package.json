@@ -1,0 +1,16 @@
+{
+  "name": "docker-tui",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/blessed": "^0.1.25",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.11.0"
+  }
+}
