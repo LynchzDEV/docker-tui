@@ -2,6 +2,9 @@
 
 A terminal-based user interface (TUI) for monitoring and managing your Docker containers. This project displays container information, CPU and memory usage charts, and provides a control panel with buttons to start, stop, restart, and delete containers—all from the terminal!
 
+## Preview
+![Docker TUI Preview](./previews/showcase.png)
+
 ## Features
 
 - **Container List:**  

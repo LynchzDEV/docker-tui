@@ -1,6 +1,6 @@
-import blessed, { Widgets } from "blessed";
-import contrib from "blessed-contrib";
-import { ContainerStats } from "../services/DockerService";
+import blessed, { Widgets } from 'blessed';
+import contrib from 'blessed-contrib';
+import { ContainerStats } from '../services/DockerService';
 
 export class StatsChartView {
   private cpuChart: Widgets.LineElement;
@@ -10,25 +10,25 @@ export class StatsChartView {
   private timestamps: string[] = [];
   private colorMap: Record<string, string> = {};
   private colorPalette: string[] = [
-    "red",
-    "green",
-    "yellow",
-    "blue",
-    "magenta",
-    "cyan",
-    "white",
-    "grey",
+    'red',
+    'green',
+    'yellow',
+    'blue',
+    'magenta',
+    'cyan',
+    'white',
+    'grey',
   ];
 
   constructor(private gridArea: any) {
     this.cpuChart = gridArea.set(0, 4, 6, 4, contrib.line, {
-      label: "CPU Usage (%)",
+      label: 'CPU Usage (%)',
       showLegend: true,
       minY: 0,
       maxY: 100,
     });
     this.memChart = gridArea.set(0, 8, 6, 4, contrib.line, {
-      label: "Memory Usage (MB)",
+      label: 'Memory Usage (MB)',
       showLegend: true,
       minY: 0,
       maxY: 4096,
@@ -90,20 +90,19 @@ export class StatsChartView {
 
     if (cpuData.length === 0) {
       cpuData.push({
-        title: "No Data",
+        title: 'No Data',
         x: [...this.timestamps],
         y: Array(this.timestamps.length).fill(0),
       });
     }
     if (memData.length === 0) {
       memData.push({
-        title: "No Data",
+        title: 'No Data',
         x: [...this.timestamps],
         y: Array(this.timestamps.length).fill(0),
       });
     }
 
-    // Dynamic Memory Range Calculation
     const allMemValues = Object.values(this.memHistory).flat();
     const computedMax = allMemValues.length > 0 ? Math.max(...allMemValues) : 0;
     const dynamicMax = computedMax > 0 ? computedMax * 1.1 : 100;
