@@ -142,6 +142,7 @@ class StatsChartView {
       minY: 0,
       maxY: 100,
     });
+    // Initially set a default maxY for memory usage.
     this.memChart = gridArea.set(0, 8, 6, 4, contrib.line, {
       label: "Memory Usage (MB)",
       showLegend: true,
@@ -151,7 +152,7 @@ class StatsChartView {
   }
 
   update(stats: Array<{ name: string; cpu: number; mem: number }>) {
-    // Push new timestamp on each update.
+    // Add new timestamp on each update.
     const now = new Date().toLocaleTimeString();
     this.timestamps.push(now);
     if (this.timestamps.length > 20) this.timestamps.shift();
@@ -183,7 +184,7 @@ class StatsChartView {
       if (this.memHistory[stat.name].length > 20)
         this.memHistory[stat.name].shift();
 
-      // Use the trimmed container name to assign a unique color.
+      // Assign a unique color based on the trimmed container name.
       if (!this.colorMap[stat.name]) {
         this.colorMap[stat.name] =
           this.colorPalette[
@@ -220,6 +221,17 @@ class StatsChartView {
         y: Array(this.timestamps.length).fill(0),
       });
     }
+
+    // *** Dynamic Memory Range Calculation ***
+    // Gather all memory usage values from history.
+    const allMemValues = Object.values(this.memHistory).flat();
+    // Compute the highest memory usage value.
+    const computedMax = allMemValues.length > 0 ? Math.max(...allMemValues) : 0;
+    // Set a dynamic max: use computedMax*1.1 (for a 10% headroom) or a default minimum (e.g. 100 MB)
+    const dynamicMax = computedMax > 0 ? computedMax * 1.1 : 100;
+    // Update the chart's maxY option dynamically.
+    this.memChart.options.maxY = dynamicMax;
+    // ******************************************
 
     this.cpuChart.setData(cpuData);
     this.memChart.setData(memData);
