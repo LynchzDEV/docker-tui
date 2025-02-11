@@ -3,20 +3,20 @@
 A terminal-based user interface (TUI) for monitoring and managing your Docker containers. This project displays container information, CPU and memory usage charts, and provides a control panel with buttons to start, stop, restart, and delete containers—all from the terminal!
 
 ## Preview
-![Docker TUI Preview](./previews/showcase.png)
+![Docker TUI Preview](./previews/example.png)
 
 ## Features
 
-- **Container List:**  
+- **Container List:**
   - Displays container ID, image, status, and ports.
   - Navigate using arrow keys.
-- **Stats Charts:**  
+- **Stats Charts:**
   - Real-time CPU usage (%) and dynamic Memory usage (MB) charts.
   - Charts dynamically adjust their scale based on current usage.
-- **Logs View:**  
+- **Logs View:**
   - Shows live logs for the selected container.
   - Press `enter` to view logs.
-- **Control Panel:**  
+- **Control Panel:**
   - Vertical button layout with actions: Start, Stop, Restart, and Delete.
   - Click (or press enter when focused) to execute commands on the selected container.
 
